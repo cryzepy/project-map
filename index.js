@@ -2,6 +2,9 @@ const express = require('express')
 const session = require("express-session");
 const cors = require("cors")
 const path = require("path")
+const bodyParser = require('body-parser');
+const multer = require("multer")
+
 
 require("dotenv").config()
 require("./config/db")()
@@ -9,8 +12,8 @@ require("./config/db")()
 const app = express()
 const PORT = process.env.PORT || 3010
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
@@ -28,7 +31,9 @@ app.set("view engine", "ejs")
 // Menentukan lokasi folder 'views'
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware untuk menangani file statis (jika diperlukan)
+
+
+
 
 
 const adminRoutes = require("./routes/adminRoutes")
