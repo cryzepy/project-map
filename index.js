@@ -1,6 +1,7 @@
 const express = require('express')
 const session = require("express-session");
 const cors = require("cors")
+const path = require("path")
 
 require("dotenv").config()
 require("./config/db")()
@@ -11,7 +12,7 @@ const PORT = process.env.PORT || 3010
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-app.use(express.static("public"))
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(
     session({
       secret: process.env.SECRET_KEY_FOR_SESSION, // Ganti dengan kunci rahasia Anda
@@ -23,7 +24,12 @@ app.use(
   
 
 app.set("view engine", "ejs")
-app.set("views", "./views")
+
+// Menentukan lokasi folder 'views'
+app.set('views', path.join(__dirname, 'views'));
+
+// Middleware untuk menangani file statis (jika diperlukan)
+
 
 const adminRoutes = require("./routes/adminRoutes")
 const authRoutes = require("./routes/authRoutes")
