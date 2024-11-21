@@ -40,11 +40,23 @@
 //     console.log(`server running on port: ${PORT}`)
 // })
 
-const e = require("express")
-const a = e()
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const { config } = require('dotenv');
 
-a.get("/", (req, res) => {
-    res.send("janchokkkk!!")
+config();
+
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(cors());
+
+app.get("/", (req, res) => {
+	res.send("hello world!!!")
 })
 
-a.listen(3000)
+app.listen(PORT,() => {
+	console.log(`server running on port:${PORT}`)
+});
