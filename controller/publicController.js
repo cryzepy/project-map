@@ -18,11 +18,12 @@ exports.maps = async (req, res) => {
 exports.detail = async (req, res) => {
     const data = await LocationsInfo.findOne({
         where: { id: req.params.id },
-        attributes: ["next_page_content"]
+        attributes: ["next_page_content", "name"]
     })
 
     if(data != null){
-        res.render('lihat_selengkapnya', { content: data.next_page_content })
+        console.log(data.next_page_content)
+        res.render('lihat_selengkapnya', { content: data.next_page_content.trim(), title: data.name })
     }else{
         res.redirect("/")
     }

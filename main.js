@@ -1,11 +1,23 @@
 const express = require('express')
+const session = require("express-session");
+
+require("dotenv").config()
 
 const app = express()
-const PORT = process.env.PORT | 3010
+const PORT = process.env.PORT || 3010
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"))
+app.use(
+    session({
+      secret: process.env.SECRET_KEY_FOR_SESSION, // Ganti dengan kunci rahasia Anda
+      resave: false,
+      saveUninitialized: true,
+      cookie: { maxAge: 60000 * 75 }, // Cookie akan kedaluwarsa dalam 75 menit
+    })
+  );
+  
 
 app.set("view engine", "ejs")
 app.set("views", "./views")
@@ -13,12 +25,13 @@ app.set("views", "./views")
 const adminRoutes = require("./routes/adminRoutes")
 const authRoutes = require("./routes/authRoutes")
 const publicRoutes = require("./routes/publicRoutes")
-const locationsInfoRoutes = require("./routes/locationsInfoRoutes")
+const dataLokusRoutes = require("./routes/dataLokusRoutes")
 
+app.use("/api/data_lokus", dataLokusRoutes)
 app.use("/admin", adminRoutes)
 app.use("/auth", authRoutes)
-app.use("/getdatalocation", locationsInfoRoutes)
 app.use("/", publicRoutes)
+
 
 
 app.listen(PORT, () => {
