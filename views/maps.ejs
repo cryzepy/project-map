@@ -9,6 +9,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="/location-pin.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
 
     #map {
@@ -34,18 +35,23 @@
                 <h2 class="text-xl font-bold mb-4"><%=element.name %></h2>
 
                 <%if(element.contact_phone && element.contact_name) {%>
-                    <a href="https://wa.me/<%=element.contact_phone%>" target="_blank" class="flex items-center justify-center bg-green-500 text-white rounded-sm px-4 py-2 hover:bg-green-600 text-center">
-                        <span class="text-white">WhatsApp (<%=element.contact_name%>)</span>
+                    <a href="https://wa.me/<%=element.contact_phone%>" target="_blank" class="flex items-center justify-center bg-green-500 gap-3 text-white rounded-sm px-4 py-2 hover:bg-green-600 text-center text-white">
+                        <i class="fa-brands fa-whatsapp fa-2x text-white"></i>
+                        <span class="text-white truncate">
+                            <%=element.contact_name%>
+                        </span>
                     </a>            
                 <%}%>
 
                  <%if(element.instagram) {%>
-                    <a href="https://www.instagram.com/<%=element.instagram%>" target="_blank" class="flex items-center justify-center bg-pink-500 text-white rounded-sm px-4 py-2 hover:bg-pink-600 text-center">
+                    <a href="https://www.instagram.com/<%=element.instagram%>" target="_blank" class="flex items-center justify-center bg-pink-500 gap-3 text-white rounded-sm px-4 py-2 hover:bg-pink-600 text-center text-white">
+                        <i class="fa-brands fa-instagram fa-2x text-white"></i>
                         <span class="text-white">Instagram</span>
                     </a>            
                 <%}%>
                 
-                <a href="/detail/<%=element.id%>" class="flex items-center justify-center bg-blue-500 text-white rounded-sm px-4 py-2 hover:bg-blue-600 text-center">
+                <a href="/detail/<%=element.id%>" class="flex items-center justify-center gap-3 bg-blue-500 text-white rounded-sm px-4 py-3 hover:bg-blue-600 text-center text-white">
+                
                     <span class="text-white">Lihat selengkapnya</span>
                 </a>
             </div>

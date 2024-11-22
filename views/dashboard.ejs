@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - DATA LOKUS KOTA BERSIH DESA TUNJUNGSEKAR"</title>
     <link rel="icon" href="/dashboard_90188.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -21,9 +22,11 @@
             >Dashboard </span
           >
           <a href="/auth/logout">
-            <button type="button" class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700">
-                Logout
-                </button>
+            <button type="button" class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center justify-center items-center dark:bg-red-600 dark:hover:bg-red-700 gap-3 space-x-1">
+               
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> 
+                <span>Logout</span>
+            </button>
           </a>
          
       </div>
@@ -31,7 +34,11 @@
 
     <div class="px-4 py-5">
         <form action="/admin/dashboard/tambah" method="GET">
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mb-9">Tambah Data</button>
+            <button type="submit" class="space-x-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mb-9">
+                
+                <i class="fa-solid fa-plus"></i>
+                <span>Tambah Data</span>
+            </button>
         </form>
     <div class="relative overflow-x-auto">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -54,10 +61,14 @@
                         </th>
                         <td class="px-6 py-4 flex">
                             <form action="/api/data_lokus/delete/<%= lokus.id %>" method="POST">
-                                <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">delete</button>
+                                <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
                             </form>
                             <form action="/admin/dashboard/edit/<%= lokus.id %>" method="GET">
-                                <button type="submit" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">edit</button>
+                                <button type="submit" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
                             </form>                       
                         </td>
                 </tr>
