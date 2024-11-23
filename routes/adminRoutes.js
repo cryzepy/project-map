@@ -13,9 +13,7 @@ router.get("/register", (req, res) => {
 
 router.get("/dashboard", isAuthenticated ,homeController.home)
 
-router.get("/dashboard/edit/:id", isAuthenticated , homeController.edit_data_lokus)
-router.get("/dashboard/tambah", isAuthenticated , homeController.tambah_data_lokus)
-
-// add comment
+router.get("/dashboard/edit/:id", isAuthenticated, homeController.edit_data_lokus)
+router.get("/dashboard/tambah", isAuthenticated, homeController.tambah_data_lokus)
 
 module.exports = router

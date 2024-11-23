@@ -3,7 +3,7 @@ const session = require("express-session");
 const cors = require("cors")
 const path = require("path")
 const bodyParser = require('body-parser');
-const multer = require("multer")
+const FileUpload = require("express-fileupload")
 
 
 require("dotenv").config()
@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 3010
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(FileUpload())
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(

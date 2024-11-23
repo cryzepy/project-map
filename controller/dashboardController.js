@@ -15,19 +15,18 @@ exports.home = async (req, res) => {
 exports.edit_data_lokus = async (req, res) => {
   const id = req.params.id;
   try {
-    const data_lokus = await LocationsInfo.findOne({ _id: id }); // Mencari data berdasarkan ID
+    const data_lokus = await LocationsInfo.findOne({ _id: id });
     if (data_lokus != null) {
       res.render("edit_data_lokus", { data_lokus });
     } else {
       throw new Error('Data tidak ditemukan');
     }
   } catch (err) {
-    console.error("Error: ", err);
     res.redirect("/auth/logout");
   }
 };
 
 // Menampilkan halaman untuk menambah data lokasi
 exports.tambah_data_lokus = async (req, res) => {
-  res.render("create_data_lokus");
+  res.render("edit_data_lokus", { data_lokus: null });
 };

@@ -11,6 +11,7 @@ const LocationsInfoSchema = new mongoose.Schema(
     next_page_content: { type: String, required: true },
     latitude: { type: Number, required: true }, // Decimal bisa diwakili oleh Number di MongoDB
     longitude: { type: Number, required: true },
+    images: { type: [String], required: false }
   },
   { collection: "locations_info", timestamps: false }
 ); // timestamps: false agar tidak otomatis menambahkan createdAt & updatedAt

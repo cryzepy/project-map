@@ -3,64 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit <%= data_lokus.name %></title>
+    <title><%= data_lokus ? "Edit " + data_lokus.name : "Tambah Data Lokus" %></title>
     <link rel="icon" href="/dashboard_90188.ico" type="image/x-icon" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   </head>
-  <body class="min-h-screen flex items-center">
-    <form class="max-w-sm mx-auto py-8" action="/api/data_lokus/edit/<%= data_lokus.id %>" method="POST">
-        <div class="mb-5">
-            <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-            <input required type="text" id="base-input" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus.name %>">
-        </div>
-        <div class="mb-5">
-            <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link google maps</label>
-            <input required type="text" id="base-input" name="google_maps_link" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus.google_maps_link %>">
-        </div>
-        <div class="grid md:grid-cols-2 md:gap-6 mb-5">
-            <div class="md:mb-0 mb-5">
-                <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Latitude (contoh : -6,200000)</label>
-                <input step="0.00000001" required type="number" id="base-input" name="latitude" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus.latitude %>">
+  <body>
+    <div class="flex flex-col items-center justify-center gap-3 my-6">
+        <p class="max-w-lg text-3xl font-semibold leading-relaxed text-gray-900"><%= data_lokus ? "Edit Data" : "Tambah Data" %></p>
+        <form class="max-w-sm mx-auto" action="<%= data_lokus ? `/api/data_lokus/edit/${data_lokus.id}` : '/api/data_lokus/tambah' %>" method="POST" enctype="multipart/form-data">
+            <div class="mb-5">
+                <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900">Nama</label>
+                <input required type="text" id="base-input" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus ? data_lokus.name : '' %>" >
             </div>
-            <div>
-                <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Longitude (contoh : -112,2034000)</label>
-                <input step="0.00000001" required type="number" id="base-input" name="longitude" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus.longitude %>">
+            <div class="mb-5">
+                <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900">Link google maps</label>
+                <input required type="text" id="base-input" name="google_maps_link" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus ? data_lokus.google_maps_link : '' %>" >
             </div>
-        </div>
-   
-
-        <div class="mb-5">
-            <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Kontak</label>
-            <input type="text" id="base-input" name="contact_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus.contact_name %>">
-        </div>
-        <div class="mb-5">
-            <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor WhatsApp (gunakan 62, contoh: 62812345678)</label>
-            <input type="text" id="base-input" name="contact_phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus.contact_phone %>">
-        </div>
-        <div class="mb-5">
-            <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username instagram (bukan link instagram)</label>
-            <input type="text" id="base-input" name="instagram" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus.instagram %>">
-        </div>
-        <div class="mb-5">
-            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tentang</label>
-            <textarea required id="message" rows="4" name="next_page_content" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."><%= data_lokus.next_page_content %></textarea>
-        </div>
-
-        <div class="mb-5">
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 space-x-1">
-                <i class="fa-solid fa-floppy-disk"></i>
-                <span>Save</span>
-            </button>
-            <button id="btn-cancel" type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 space-x-1">
-                <i class="fa-solid fa-xmark"></i>
-                <span>Batal</span>
-            </button>
-        </div>
-        
+            <div class="grid md:grid-cols-2 md:gap-6 mb-5">
+                <div class="md:mb-0 mb-5">
+                    <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900">Latitude</label>
+                    <input step="0.00000001" required type="number" id="base-input" name="latitude" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus ? data_lokus.latitude: '' %>" >
+                </div>
+                <div>
+                    <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900">Longitude</label>
+                    <input step="0.00000001" required type="number" id="base-input" name="longitude" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus ? data_lokus.longitude : '' %>" >
+                </div>
+            </div>
        
-    </form>
+            <div class="mb-5">
+                <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900">Nama Kontak</label>
+                <input type="text" id="base-input" name="contact_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus ? data_lokus.contact_name : '' %>" >
+            </div>
+            <div class="mb-5">
+                <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900">Nomor WhatsApp (ex: 6281234567890)</label>
+                <input type="text" id="base-input" name="contact_phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus ? data_lokus.contact_phone : '' %>" >
+            </div>
+            <div class="mb-5">
+                <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900">Username instagram (bukan link instagram)</label>
+                <input type="text" id="base-input" name="instagram" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus ? data_lokus.instagram : '' %>" >
+            </div>
+            <div class="mb-5">
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Tentang</label>
+                <textarea required id="message" rows="4" name="next_page_content" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"><%= data_lokus ? data_lokus.next_page_content : '' %></textarea>
+            </div>
+
+            <div class="mb-5">
+                <label for="inputImage" class="block mb-2 text-sm font-medium text-gray-900">Tambah Gambar</label>
+                <input type="file" multiple name="images" id="inputImage">
+            </div>
+    
+            <div class="mb-5">
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 space-x-1">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>Save</span>
+                </button>
+                <button id="btn-cancel" type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 space-x-1">
+                    <i class="fa-solid fa-xmark"></i>
+                    <span>Batal</span>
+                </button>
+            </div>
+        </form>
+    </div>
+   
     <script>
         document.getElementById("btn-cancel").addEventListener("click", () => {
             window.location.href = "/admin/dashboard";

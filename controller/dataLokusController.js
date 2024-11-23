@@ -1,10 +1,9 @@
 const LocationsInfo = require("../model/LocationsInfo");
-
-
+const { saveImagesAndLinks } = require("../helpers/saveImagesAndLinks");
+const { getDataImagesFromClient } = require("../helpers/getDataImagesFromClient")
 
 // Menambahkan data lokasi
 exports.addDataLokus = async (req, res) => {
-
   const {
     name,
     google_maps_link,
@@ -16,9 +15,10 @@ exports.addDataLokus = async (req, res) => {
     longitude,
   } = req.body;
 
+  let id = null;
+
   try {
-    // Menambahkan data ke database
-    const newLocation = await LocationsInfo.create({
+    const newData = await LocationsInfo.create({
       name,
       google_maps_link,
       contact_name,
@@ -29,9 +29,20 @@ exports.addDataLokus = async (req, res) => {
       longitude,
     });
 
-    console.log("Sukses menambahkan data:");
+    id = newData.id;
+
+    const images = getDataImagesFromClient(req);
+
+    if(images) {
+        await saveImagesAndLinks(images, id);
+    }
+
   } catch (err) {
-    console.log("Gagal menambahkan data:", err);
+    try {
+      await LocationsInfo.deleteOne({ _id: id });
+    } finally {
+      console.log("Gagal menambahkan data:", err);
+    }
   } finally {
     res.redirect("/admin/dashboard");
   }
@@ -40,8 +51,6 @@ exports.addDataLokus = async (req, res) => {
 // Menghapus data lokasi
 exports.deleteDataLokus = async (req, res) => {
   const id = req.params.id;
-
-  console.log("id = ", id);
 
   try {
     const deleteCount = await LocationsInfo.deleteOne({ _id: id });
@@ -62,7 +71,6 @@ exports.deleteDataLokus = async (req, res) => {
 exports.editDataLokus = async (req, res) => {
   const { id } = req.params;
 
-  console.log("files = ", req.files);
   const {
     name,
     google_maps_link,
@@ -89,22 +97,15 @@ exports.editDataLokus = async (req, res) => {
       }
     );
 
-    if (editCount.modifiedCount === 1) {
-      console.log("Data berhasil diperbarui");
-    } else {
-      console.log("Tidak ada perubahan pada data");
+    const images = getDataImagesFromClient(req);
+
+    if(images) {
+        await saveImagesAndLinks(images, id);
     }
+    
   } catch (err) {
     console.log("Gagal mengedit data:", err);
   } finally {
     res.redirect("/admin/dashboard");
   }
-};
-
-exports.saveImage = (req, res) => {
-    const uploads = upload.array("file", 11)
-    uploads(req, res, err => {
-        if(err) return res.status(500).send({message: err})
-            return res.status(200).send({message: "File uploaded successfully"})
-    })
 };
