@@ -1,7 +1,7 @@
 const LocationsInfo = require("../model/LocationsInfo");
 
 exports.maps = async (req, res) => {
-    const title = "MAPS | DATA LOKUS KOTA BERSIH DESA TUNJUNGSEKAR"
+    const title = "Map lokus kelurahan sehat tunjungsekar"
     try {
         // Mengambil data dari MongoDB
         const data = await LocationsInfo.find({}, "id name contact_name contact_phone instagram latitude longitude google_maps_link");
