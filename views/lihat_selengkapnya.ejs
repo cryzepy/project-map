@@ -25,9 +25,9 @@
       <%-data.next_page_content.trim().replace(/\n/g, '<br />') %> 
     </div>
     <%
-    if(data.link_gambar.length) {%> 
-      <div class="px-4 text-xl text-white overflow-hidden break-words">
-    <a class="text-xl font-bold" href="<%=data.link_gambar%>">Lihat gambar</a>
+    if(data.link_gambar) {%> 
+      <div class="px-4 pb-4 text-xl text-white overflow-hidden break-words">
+    <a class="text-xl font-bold" href="<%=data.link_gambar%>" target="_blank">Lihat gambar</a>
   </div>      
     <% } %>
 
