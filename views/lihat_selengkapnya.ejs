@@ -21,16 +21,15 @@
         </a>
       </div>
     </nav>
-    <div class="p-4 text-xl text-white overflow-hidden break-words">
-      <%-data.next_page_content.trim().replace(/\n/g, '<br />') %> <%
-      if(data.images.length) {%> 
-        <h1 class="mt-7 text-3xl font-bold">Gambar</h1>
-        <div class="flex flex-wrap justify-center items-center gap-2 m-4">
-            <% data.images.forEach(function(image) { %>
-                <img src="/data_images/<%=image%>" alt="image" style="width: 300px; height: fit-content;">
-            <% })%>
-        </div>
-      <% } %>
+    <div class="px-4 py-5 text-xl text-white overflow-hidden break-words">
+      <%-data.next_page_content.trim().replace(/\n/g, '<br />') %> 
     </div>
+    <%
+    if(data.link_gambar.length) {%> 
+      <div class="px-4 text-xl text-white overflow-hidden break-words">
+    <a class="text-xl font-bold" href="<%=data.link_gambar%>">Lihat gambar</a>
+  </div>      
+    <% } %>
+
   </body>
 </html>

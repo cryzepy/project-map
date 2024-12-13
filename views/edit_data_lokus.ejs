@@ -49,10 +49,16 @@
                 <textarea required id="message" rows="4" name="next_page_content" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"><%= data_lokus ? data_lokus.next_page_content : '' %></textarea>
             </div>
 
-            <div class="mb-5">
+            <!-- <div class="mb-5">
                 <label for="inputImage" class="block mb-2 text-sm font-medium text-gray-900">Tambah Gambar</label>
                 <input disabled type="file" multiple name="images" id="inputImage" class="mb-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
                 <span class="block mb-2 text-xs text-gray-900">Maksimal ukuran 2MB</span>
+            </div> -->
+
+            <div class="mb-5">
+                <label for="input_link_image" class="block mb-2 text-sm font-medium text-gray-900">Tambah Link Gambar / Folder Google Drive</label>
+                <input type="url" id="input_link_image" name="link_gambar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<%= data_lokus ? data_lokus.link_gambar : '' %>" >
+                
             </div>
     
             <div class="mb-5">

@@ -8,7 +8,7 @@ exports.maps = async (req, res) => {
         console.log(data)
         res.render('maps', { data, title });
     } catch (err) {
-        console.log(err);
+        console.log("gagal mengambil data lokus");
         res.render("maps", { data: [], title });
     }
 };
@@ -16,7 +16,7 @@ exports.maps = async (req, res) => {
 exports.detail = async (req, res) => {
     try {
         // Mengambil satu data berdasarkan ID dari MongoDB
-        const data = await LocationsInfo.findOne({ _id: req.params.id }, "next_page_content name images");
+        const data = await LocationsInfo.findOne({ _id: req.params.id }, "next_page_content name link_gambar");
 
         if (data != null) {
             res.render('lihat_selengkapnya', { data });

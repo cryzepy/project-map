@@ -1,6 +1,8 @@
 const LocationsInfo = require("../model/LocationsInfo");
 const { saveImagesAndLinks } = require("../helpers/saveImagesAndLinks");
-const { getDataImagesFromClient } = require("../helpers/getDataImagesFromClient")
+const {
+  getDataImagesFromClient,
+} = require("../helpers/getDataImagesFromClient");
 
 // Menambahkan data lokasi
 exports.addDataLokus = async (req, res) => {
@@ -13,9 +15,8 @@ exports.addDataLokus = async (req, res) => {
     next_page_content,
     latitude,
     longitude,
+    link_gambar,
   } = req.body;
-
-  let id = null;
 
   try {
     const newData = await LocationsInfo.create({
@@ -27,22 +28,12 @@ exports.addDataLokus = async (req, res) => {
       next_page_content,
       latitude,
       longitude,
+      link_gambar,
     });
 
     id = newData.id;
-
-    const images = getDataImagesFromClient(req);
-
-    if(images) {
-        await saveImagesAndLinks(images, id);
-    }
-
   } catch (err) {
-    try {
-      await LocationsInfo.deleteOne({ _id: id });
-    } finally {
-      console.log("Gagal menambahkan data:", err);
-    }
+    console.log("Gagal menambahkan data:", err);
   } finally {
     res.redirect("/admin/dashboard");
   }
@@ -80,6 +71,7 @@ exports.editDataLokus = async (req, res) => {
     next_page_content,
     latitude,
     longitude,
+    link_gambar,
   } = req.body;
 
   try {
@@ -94,15 +86,10 @@ exports.editDataLokus = async (req, res) => {
         next_page_content,
         latitude,
         longitude,
+        link_gambar,
       }
     );
-
-    const images = getDataImagesFromClient(req);
-
-    if(images) {
-        await saveImagesAndLinks(images, id);
-    }
-    
+    console.log("sukses mengedit data.\nedit count: ", editCount);
   } catch (err) {
     console.log("Gagal mengedit data:", err);
   } finally {
